@@ -1,7 +1,11 @@
 package SoloStudy.BookMarket.BoardTest;
 
 
+import jdk.jfr.DataAmount;
+
 import java.util.Date;
+
+
 
 public class Board {
     private int bno;

@@ -1,0 +1,10 @@
+개발자들을 괴롭히는 Null
+1. Null의 정의
+특정한 데이터 값이 없다.
+2. Null과 참조형 필드와 관계
+ 기본타입 x 0 x false x
+ 참조타입의 초기값을 null
+ 주소값이 없는 것입니다
+3. Null과 Static 키워드
+4. Null과 instanceof
+5. NullPointerException 처리
