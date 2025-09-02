@@ -2,8 +2,10 @@ package workshop1;
 
 
 import java.io.*;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class StudentInput {
@@ -16,6 +18,30 @@ public class StudentInput {
     static File file = new File(filepath);// 파일의 객체 생성
     static Scanner sc = new Scanner(System.in);//아무래도 계산을 해야 됨으로 스캐너 사용
 
+    public static void Inputstudent() {
+        while (true) {
+            System.out.print("이름: ");
+            String name = sc.nextLine();
+            if (name.equals("^^")) {
+                System.out.println("입력을 종료합니다.");
+                break;
+            }
+
+            if (students.containsKey(name)) {
+                System.out.println("[오류] 이미 존재하는 이름입니다. 다른 이름을 입력하세요.");
+                continue;
+            }
+
+            List<Integer> record = inputScore(); // 과목 점수 입력
+            Student student = new Student(name, record);
+            StudentGradeCalculator.calculate(student);
+
+            students.put(name, student);
+
+            System.out.printf("=> 저장됨: %s (총점=%d, 평균=%.1f, 학점=%s)\n",g
+                    name, student.getTotal(), student.getAverage(), student.getGrade());
+        }
+    }
 
     public static void loadCheck() {//메서드는 메인 밖에서
         if (file.exists()) {
@@ -38,20 +64,36 @@ public class StudentInput {
         }
     }
 
+    public static int getValidScore(String subject) {//성적입력 유효성 검사
+        while (true) {
+            System.out.print(subject + ": ");
+            try {
+                int score = Integer.parseInt(sc.nextLine());
+                if (score >= 0 && score <= 100) ;
+                else System.out.println("[오류] 0~100 사이의 정수만 입력하세요.");
+            } catch (NumberFormatException e) {
+                System.out.println("[오류] 숫자만 입력하세요.");
+            }
+        }
+    }
 
-    public static void printUsage() {//설명서 나오는 메서드
-        System.out.println("학생 성적 입력 프로그램입니다.");
-        System.out.println("종료를 원하시면 F를 눌러주세요");
-        System.out.println("점수는 0~100사이의 정수만 가능합니다.");
+    public static List<Integer> inputScore() {//점수 리스트 타입 입력장치
+        List<Integer> record = new ArrayList<>();
+        record.add(getValidScore("국어"));
+        record.add(getValidScore("영어"));
+        record.add(getValidScore("수학"));
+        record.add(getValidScore("과학"));
+        return record;
+    }
+
+    public static void main(String[] args) {
+        StudentOuntput.printUsage();
+        loadCheck();
+        Inputstudent();
 
     }
 
-    //호환성
-
-    public static void main(String[] args) {
-        loadCheck();
-        printUsage();
-    }    // 메서드들을 여기에 차례로 호출}
-    //파일이 존재하면 기존 데이터를 불러오고, 없
 
 }
+
+
