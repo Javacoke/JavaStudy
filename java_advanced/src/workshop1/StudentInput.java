@@ -38,7 +38,7 @@ public class StudentInput {
 
             students.put(name, student);
 
-            System.out.printf("=> 저장됨: %s (총점=%d, 평균=%.1f, 학점=%s)\n",g
+            System.out.printf("=> 저장됨: %s (총점=%d, 평균=%.1f, 학점=%s)\n",
                     name, student.getTotal(), student.getAverage(), student.getGrade());
         }
     }
