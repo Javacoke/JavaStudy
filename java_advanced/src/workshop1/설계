@@ -1,0 +1,7 @@
+클래스는 총 3개다.
+1. student(모델 객체)
+
+학생 1명의 성적 정보를 표현하는 직렬화 가능한 도메인 클래스
+String name
+List<integer> record
+int total, double average, String grade
